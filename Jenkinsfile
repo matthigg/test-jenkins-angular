@@ -12,14 +12,22 @@ pipeline {
       }
     }
     
-    stage('Install, Test, & Build') {
+    stage('Install') {
       steps {
-        sh '''
-          npm install
-          npm run test
-          npm run build
-        '''
+        sh 'npm install'
       }
-    } 
+    }
+    
+    stage('Test') {
+      steps {
+        sh 'npm run test --watch false'
+      }
+    }
+    
+    stage('Build') {
+      steps {
+        sh 'npm run build'
+      }
+    }
   }
 }
